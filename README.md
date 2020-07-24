@@ -85,9 +85,9 @@ Some extra steps are needed, you **have to** use an editor with su rights for th
 
 ### In `/path/to/seafile/volume/conf/ccnet.conf` 
 
-Remove the port associated with the `SERVICE_URL`:
+Remove the port associated with the `SERVICE_URL` and use https:
 
-`SERVICE_URL = http://your.domain`
+`SERVICE_URL = https://your.domain`
 
 ### In `/path/to/seafile/volume/conf/gunicorn.conf.py`
 
@@ -104,7 +104,7 @@ To:
 Add the following lines (with your domain correctly set):
 
 ```
-FILE_SERVER_ROOT = 'http://your.domain/seafhttp'
+FILE_SERVER_ROOT = 'https://your.domain/seafhttp'
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ```
