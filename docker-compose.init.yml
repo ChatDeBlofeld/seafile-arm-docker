@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  seafile:
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+      - reverse-proxy
+    entrypoint: ["/root/init.sh"]
+
+  db:
+    environment:
+      MYSQL_ROOT_PASSWORD: password # <-- Choose a password for the root user

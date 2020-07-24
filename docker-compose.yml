@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  seafile:
+    image: franchetti/seafile-arm
+    restart: always
+    volumes:
+      - ./seafile:/shared # <-- Permanent data are stored in the same folder as the compose file by default
+    depends_on:
+      - db
+
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - ./db:/var/lib/mysql # <-- Permanent data are stored in the same folder as the compose file by default
+      
+  reverse-proxy:
+    image: linuxserver/letsencrypt
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich # <-- Change if needed
+      - URL=your.domain #  <-- Your domain
+      - VALIDATION=http
+    volumes:
+      - ./reverse-proxy:/config # <-- Permanent data are stored in the same folder as the compose file by default
+      - ./seafile:/shared # <-- Has to be the same volume as the seafile service
+    ports:
+      - 443:443
+      - 80:80
