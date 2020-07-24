@@ -10,10 +10,15 @@ services:
       - db
 
   db:
-    image: mariadb
+    image: linuxserver/mariadb
     restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD= # <-- Choose a password for the root user
+      - TZ=Europe/Zurich #     <-- Change if needed
     volumes:
-      - ./db:/var/lib/mysql # <-- Permanent data are stored in the same folder as the compose file by default
+      - ./db:/config # <-- Permanent data are stored in the same folder as the compose file by default
       
   reverse-proxy:
     image: linuxserver/letsencrypt

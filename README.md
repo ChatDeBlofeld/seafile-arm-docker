@@ -5,7 +5,7 @@ A docker-compose based deployment intended to bring seafile on any ARMv7/v8 boar
 This environment has been set up using the following images and packages (which you should glance at for further documentation):
 
 - [Seafile for Raspberry PI]( https://github.com/haiwen/seafile-rpi )
-- [MariaDB] ( https://hub.docker.com/_/mariadb ) as database server
+- [linuxserver/mariadb]( https://hub.docker.com/r/linuxserver/mariadb ) as database server
 - [linuxserver/letsencrypt]( https://github.com/linuxserver/docker-letsencrypt ) as reverse-proxy
 
 No guarantees of any kind are provided by using this environment.
@@ -130,7 +130,7 @@ You should now be able to access `https://your.domain` and log in with your prev
 
 ## Updating
 
-Any patch (x.x.**y.**) should be upgradable with a pull of the latest seafile-arm image.
+Any patch (x.x.**y**) should be upgradable with a pull of the latest seafile-arm image.
 
 The process for minor/major versions has not been fully considered yet.
 
