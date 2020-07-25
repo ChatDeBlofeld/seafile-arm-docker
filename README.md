@@ -105,8 +105,6 @@ Add the following lines (with your domain correctly set):
 
 ```
 FILE_SERVER_ROOT = 'https://your.domain/seafhttp'
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ```
 
 ### Reverse-proxy configuration
