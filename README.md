@@ -87,7 +87,11 @@ Some extra steps are needed, you **have to** use an editor with su rights for th
 
 Remove the port associated with the `SERVICE_URL` and use https:
 
-`SERVICE_URL = https://your.domain`
+```
+SERVICE_URL = https://your.domain
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+```
 
 ### In `/path/to/seafile/volume/conf/gunicorn.conf.py`
 
