@@ -21,7 +21,7 @@ services:
       - ./db:/config # <-- Permanent data are stored in the same folder as the compose file by default
       
   reverse-proxy:
-    image: linuxserver/letsencrypt
+    image: linuxserver/swag
     restart: always
     cap_add:
       - NET_ADMIN

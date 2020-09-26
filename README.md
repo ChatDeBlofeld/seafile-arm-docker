@@ -6,7 +6,7 @@ This environment has been set up using the following images and packages (which 
 
 - [Seafile for Raspberry PI]( https://github.com/haiwen/seafile-rpi )
 - [linuxserver/mariadb]( https://hub.docker.com/r/linuxserver/mariadb ) as database server
-- [linuxserver/letsencrypt]( https://github.com/linuxserver/docker-letsencrypt ) as reverse-proxy
+- [linuxserver/swag]( https://github.com/linuxserver/docker-swag ) as reverse-proxy with cerbot support for _Let's Encrypt_.
 
 No guarantees of any kind are provided by using this environment.
 
