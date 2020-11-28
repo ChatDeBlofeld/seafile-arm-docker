@@ -81,11 +81,9 @@ Finally, run `docker-compose stop` to stop the containers during the next config
 
 ## Configuration
 
-Some extra steps are needed, you **have to** use an editor with su rights for the first 3.
-
 ### In `/path/to/seafile/volume/conf/ccnet.conf` 
 
-Remove the port associated with the `SERVICE_URL` and use https:
+Enable https:
 
 ```
 SERVICE_URL = https://your.domain
@@ -132,26 +130,46 @@ You should now be able to access `https://your.domain` and log in with your prev
 
 ## Updating
 
-Any patch (x.x.**y**) should be upgradable with a pull of the latest seafile-arm image.
+### 7.1.4 -> 7.1.9
 
-The process for minor/major versions has not been fully considered yet.
+Stop the server.
+
+On the host, run with the root access:
+
+```
+chown -R 1000:1000 /path/to/seafile/volume
+```
+
+Then pull the new image and restart the server.
 
 ## Troubleshooting
 
+For any initialization bugs, first try removing all volumes and containers and run again.
+
+### Seahub failed to start
+
 The `docker logs` command could provide precious information about what went wrong.
+
+If seahub did not start, try running new containers with `docker-compose up -d --force-recreate`. Manually start it inside the container with `/opt/seafile/seafile-server-latest/seafile.sh start-fastcgi` provide more logs and could be useful.
+
+It's also possible to set `daemon` to `False` in `gunicorn.conf.py` to grab more information about a failed start.
+
+### Database
 
 If the connection to the database server is refused when checking the root password (Errno 111), try waiting for a while (~5 minutes) until the server is fully started.
 
-For any other initialization bugs, first try removing all volumes and containers and run again.
+### Test environment
 
-If seahub did not start, try running new containers with `docker-compose up -d --force-recreate`. Manually start it inside the container with `/opt/seafile/seafile-server-latest/seafile.sh start-fastcgi` could also help debuging.
-
-If you can't run the letsencrypt container yet (no port forwarding, no domain or whatever), you may want using the testing reverse-proxy. It's a simple Nginx configuration without SSL, just change the mentioned field in `nginx/seafile.conf` and the seafile configuration files for using the hostname of your server.
+If you can't run the letsencrypt container yet (no port forwarding, no domain or whatever), you may want using the testing reverse-proxy. It's a simple Nginx configuration without SSL, just change the mentioned field in `nginx/seafile.conf` and the seafile configuration files for using the hostname of your server (probably 127.0.0.1).
 
 For initialization:
 
-`docker-compose -f docker-compose.yml -f docker-compose.testing.yml -f docker-compose.init.yml  run --rm seafile`
+```
+docker-compose -f docker-compose.yml -f docker-compose.testing.yml -f docker-compose.init.yml  run --rm seafile
+```
 
 For run:
 
-`docker-compose -f docker-compose.yml -f docker-compose.testing.yml up -d`
+```
+docker-compose -f docker-compose.yml -f docker-compose.testing.yml up -d
+```
