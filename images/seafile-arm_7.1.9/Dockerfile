@@ -34,7 +34,13 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-setuptools \
     python3-ldap \
-    python3-sqlalchemy
+    python3-sqlalchemy \
+    # Folowing libs are useful for the armv7 arch only
+    # Since they're not heavy, no need to create separate pipelines atm
+    libjpeg62-turbo \
+    libopenjp2-7 \
+    libtiff5 \
+    libxcb1
 
 WORKDIR /opt/seafile
 
