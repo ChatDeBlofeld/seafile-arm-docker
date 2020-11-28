@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MULTIARCH_PLATFORMS="linux/arm/v7,linux/arm64"
+MULTIARCH_PLATFORMS="linux/amd64,linux/arm/v7,linux/arm64"
 
 USER="franchetti"
 IMAGE="seafile-arm"
