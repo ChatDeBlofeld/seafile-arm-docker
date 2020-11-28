@@ -130,9 +130,17 @@ You should now be able to access `https://your.domain` and log in with your prev
 
 ## Updating
 
-Any patch (x.x.**y**) should be upgradable with a pull of the latest seafile-arm image.
+### 7.1.4 -> 7.1.9
 
-The process for minor/major versions has not been fully considered yet.
+Stop the server.
+
+On the host, run with the root access:
+
+```
+chown -R 1000:1000 /path/to/seafile/volume
+```
+
+Then pull the new image and restart the server.
 
 ## Troubleshooting
 
