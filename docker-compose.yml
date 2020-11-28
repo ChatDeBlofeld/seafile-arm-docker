@@ -15,8 +15,8 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - MYSQL_ROOT_PASSWORD= # <-- Choose a password for the root user
-      - TZ=Europe/Zurich #     <-- Change if needed
+      - MYSQL_ROOT_PASSWORD=secret # <-- Choose a password for the root user
+      - TZ=Europe/Zurich #           <-- Change if needed
     volumes:
       - ./db:/config # <-- Permanent data are stored in the same folder as the compose file by default
       
