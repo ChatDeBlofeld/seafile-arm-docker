@@ -7,4 +7,4 @@ services:
     depends_on:
       - db
       - reverse-proxy
-    entrypoint: ["/root/init.sh"]
+    entrypoint: ["/home/seafile/init.sh"]
