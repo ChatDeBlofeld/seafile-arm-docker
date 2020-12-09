@@ -5,8 +5,8 @@ services:
     image: franchetti/seafile-arm
     restart: always
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1000 # Same function as in the linuxserver images
+      - PGID=1000 # See https://github.com/linuxserver/docker-swag#user--group-identifiers
     volumes:
       - ./seafile:/shared # <-- Permanent data are stored in the same folder as the compose file by default
     depends_on:
