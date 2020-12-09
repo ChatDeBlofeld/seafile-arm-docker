@@ -16,6 +16,4 @@ chown -R seafile:seafile /home/seafile
 chown -R seafile:seafile /opt/seafile
 chown -R seafile:seafile /shared
 
-sudo su seafile << EOF
-    /home/seafile/$1.sh $VERSION
-EOF
+su seafile -Plc "/home/seafile/$1.sh $VERSION"
