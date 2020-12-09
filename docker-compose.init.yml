@@ -7,4 +7,4 @@ services:
     depends_on:
       - db
       - reverse-proxy
-    entrypoint: ["/home/seafile/init.sh"]
+    entrypoint: ["/docker_entrypoint.sh", "init"]

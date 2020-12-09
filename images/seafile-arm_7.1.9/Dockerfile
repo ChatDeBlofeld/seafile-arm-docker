@@ -48,13 +48,12 @@ RUN useradd -ms /bin/bash -G sudo seafile \
     && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && chown -R seafile:seafile /opt/seafile
 
-USER seafile
-
 COPY --from=builder --chown=seafile:seafile /seafile /opt/seafile
 
+COPY docker_entrypoint.sh /
 COPY --chown=seafile:seafile scripts /home/seafile
 
 # Add version in container context
 ENV VERSION $VERSION
 
-CMD ["/home/seafile/launch.sh"]
+CMD ["/docker_entrypoint.sh", "launch"]

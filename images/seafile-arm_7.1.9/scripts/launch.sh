@@ -2,6 +2,8 @@
 
 cd /opt/seafile
 
+VERSION=$1
+
 if [ ! -d "/shared/conf" ]
 then
     echo "No configuration available. Please run init.sh first."

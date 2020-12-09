@@ -4,6 +4,9 @@ services:
   seafile:
     image: franchetti/seafile-arm
     restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
     volumes:
       - ./seafile:/shared # <-- Permanent data are stored in the same folder as the compose file by default
     depends_on:

@@ -132,15 +132,9 @@ You should now be able to access `https://your.domain` and log in with your prev
 
 ### 7.1.4 -> 7.1.9
 
-Stop the server.
-
-On the host, run with the root access:
-
-```
-chown -R 1000:1000 /path/to/seafile/volume
-```
-
-Then pull the new image and restart the server.
+- Stop the server.
+- Pull the new image
+- Restart the server.
 
 ## Troubleshooting
 
