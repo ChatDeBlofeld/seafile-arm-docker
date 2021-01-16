@@ -99,7 +99,7 @@ Change:
 
 To:
 
-`bind = "seafile:8000"
+`bind = "seafile:8000"`
 
 >Note: for an instance with few users, decrease the number of workers will significantly reduce RAM usage
 
