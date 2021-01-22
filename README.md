@@ -4,7 +4,7 @@ A docker-compose based deployment intended to bring seafile on any ARMv7/v8 boar
 
 This environment has been set up using the following images and packages (which you should glance at for further documentation):
 
-- [Seafile for Raspberry PI]( https://github.com/haiwen/seafile-rpi )
+- [Base Docker image]( https://github.com/ChatDeBlofeld/seafile-arm-docker-base )
 - [linuxserver/mariadb]( https://hub.docker.com/r/linuxserver/mariadb ) as database server
 - [linuxserver/swag]( https://github.com/linuxserver/docker-swag ) as reverse-proxy with cerbot support for _Let's Encrypt_.
 
