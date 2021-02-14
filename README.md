@@ -36,7 +36,7 @@ Some points need attention though when editing the compose file.
 
 #### Volumes
 
-By default, all data are stored in the compose file directory. Feel free to remap the volumes wherever you need, for example on an external drive. Keep in mind that the Seafile volume is also used in the `reverse-proxy` service.
+By default, all data are stored in the compose file directory. Feel free to remap the volumes wherever you need, for example on an external drive. Just be careful that the `seahub-data` volume is also used in the `reverse-proxy` service.
 
 ### Reverse-proxy configuration
 

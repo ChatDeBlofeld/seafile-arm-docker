@@ -15,7 +15,11 @@ services:
       - MYSQL_USER_PASSWD=secret
       - MYSQL_ROOT_PASSWD=secret
     volumes:
-      - ./seafile:/shared
+      - media:/shared/media
+      - ./seafile/conf:/shared/conf
+      - ./seafile/logs:/shared/logs
+      - ./seafile/seafile-data:/shared/seafile-data
+      - ./seafile/seahub-data:/shared/seahub-data
     depends_on:
       - db
 
@@ -42,8 +46,12 @@ services:
       - URL=your.domain
       - VALIDATION=http
     volumes:
+      - media:/shared/media
+      - ./seafile/seahub-data:/shared/seahub-data
       - ./reverse-proxy:/config
-      - ./seafile:/shared
     ports:
       - 443:443
       - 80:80
+
+volumes:
+  media:
