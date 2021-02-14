@@ -5,7 +5,7 @@ services:
     image: nginx
     restart: always
     volumes:
-      - ./nginx/seafile.conf:/etc/nginx/conf.d/seafile.conf:ro
+      - ./nginx/seafile.testing.conf:/etc/nginx/conf.d/seafile.conf:ro
       - ./seafile:/shared
     ports:
       - "80:80"

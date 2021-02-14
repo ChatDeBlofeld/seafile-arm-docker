@@ -5,10 +5,17 @@ services:
     image: franchetti/seafile-arm
     restart: always
     environment:
-      - PUID=1000 # Same function as in the linuxserver images
-      - PGID=1000 # See https://github.com/linuxserver/docker-swag#user--group-identifiers
+      - PUID=1000
+      - PGID=1000
+      - SERVER_IP=your.domain
+      - SEAFILE_ADMIN_EMAIL=you@your.email
+      - SEAFILE_ADMIN_PASSWORD=secret
+      - ENABLE_TLS=1
+      - MYSQL_HOST=db
+      - MYSQL_USER_PASSWD=secret
+      - MYSQL_ROOT_PASSWD=secret
     volumes:
-      - ./seafile:/shared # <-- Permanent data are stored in the same folder as the compose file by default
+      - ./seafile:/shared
     depends_on:
       - db
 
@@ -18,10 +25,10 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - MYSQL_ROOT_PASSWORD=secret # <-- Choose a password for the root user
-      - TZ=Europe/Zurich #           <-- Change if needed
+      - MYSQL_ROOT_PASSWORD=secret
+      - TZ=Europe/Zurich
     volumes:
-      - ./db:/config # <-- Permanent data are stored in the same folder as the compose file by default
+      - ./db:/config
       
   reverse-proxy:
     image: linuxserver/swag
@@ -31,12 +38,12 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Zurich # <-- Change if needed
-      - URL=your.domain #  <-- Your domain
+      - TZ=Europe/Zurich
+      - URL=your.domain
       - VALIDATION=http
     volumes:
-      - ./reverse-proxy:/config # <-- Permanent data are stored in the same folder as the compose file by default
-      - ./seafile:/shared # <-- Has to be the same volume as the seafile service
+      - ./reverse-proxy:/config
+      - ./seafile:/shared
     ports:
       - 443:443
       - 80:80
