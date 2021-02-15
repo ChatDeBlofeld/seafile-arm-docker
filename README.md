@@ -43,7 +43,7 @@ By default, all data are stored in the compose file directory. Feel free to rema
 First generate the certificates by running the service once:
 
 ```
-$ docker-compose run --rm reverse-proxy
+$ docker-compose up reverse-proxy
 ```
 
 If everything went right, stop the container and copy the file `nginx/seafile.conf` to `/path/to/reverse-proxy/volume/nginx/site-confs` and set your domain at the mentioned sections.
