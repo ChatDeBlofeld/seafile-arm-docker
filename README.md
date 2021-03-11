@@ -50,8 +50,8 @@ If everything went right, stop the container and copy the file `nginx/seafile.co
 
 You may want to see the following resources for more information about this configuration:
 
-- https://download.seafile.com/published/seafile-manual/deploy/deploy_with_nginx.md
-- https://download.seafile.com/published/seafile-manual/deploy/https_with_nginx.md
+- https://manual.seafile.com/deploy/deploy_with_nginx/
+- https://manual.seafile.com/deploy/https_with_nginx
 
 ## Run
 
