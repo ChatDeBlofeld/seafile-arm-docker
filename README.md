@@ -73,7 +73,7 @@ Currently there's no breaking changes between the images, so the update is strai
 
 ```
 $ docker-compose down
-$ docker-compose pull franchetti/seafile-arm
+$ docker-compose pull seafile
 $ docker-compose up -d
 ```
 
