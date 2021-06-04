@@ -6,6 +6,7 @@ CACHES = {
         'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
         'LOCATION': 'memcached:11211',
     },
+}
 ```
 
 ## Webdav (seafdav.conf)
