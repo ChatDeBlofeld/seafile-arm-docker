@@ -2,15 +2,14 @@ version: '3'
 
 services:
   seafile:
-    image: franchetti/seafile-arm
-    restart: always
+    image: franchetti/seafile-arm:testing
+    # restart: always
     environment:
       - PUID=1000
       - PGID=1000
-      - SERVER_IP=your.domain
+      # - SERVER_IP=192.168.50.144
       - SEAFILE_ADMIN_EMAIL=you@your.email
       - SEAFILE_ADMIN_PASSWORD=secret
-      - ENABLE_TLS=1
       - MYSQL_HOST=db
       - MYSQL_USER_PASSWD=secret
       - MYSQL_ROOT_PASSWD=secret
@@ -52,6 +51,9 @@ services:
     ports:
       - 443:443
       - 80:80
+
+  memcached:
+    image: memcached
 
 volumes:
   media:
