@@ -7,6 +7,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - TZ=Europe/Zurich
       - SERVER_IP=your.domain
       - SEAFILE_ADMIN_EMAIL=you@your.email
       - SEAFILE_ADMIN_PASSWORD=secret
