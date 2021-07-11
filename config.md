@@ -1,4 +1,4 @@
-## Memcached (seahub_config.py)
+## Memcached (seahub_settings.py)
 
 ```python
 CACHES = {
