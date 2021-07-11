@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - media:/shared/media
-      - ./seafile/seahub-data:/shared/seahub-data
-      - ./nginx/seafile.testing.conf:/etc/nginx/conf.d/seafile.conf:ro
+      - $SEAFILE_SEAHUB_DIR:/shared/seahub-data
+      - ./nginx/seafile.noswag.conf:/etc/nginx/conf.d/seafile.conf:ro
     ports:
       - 80:80

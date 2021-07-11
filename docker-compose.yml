@@ -5,35 +5,25 @@ services:
     image: franchetti/seafile-arm
     restart: always
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Zurich
-      - SERVER_IP=your.domain
-      - SEAFILE_ADMIN_EMAIL=you@your.email
-      - SEAFILE_ADMIN_PASSWORD=secret
-      - ENABLE_TLS=1
-      - MYSQL_HOST=db
-      - MYSQL_USER_PASSWD=secret
-      - MYSQL_ROOT_PASSWD=secret
+      - PUID=$PGID
+      - PGID=$PUID
+      - TZ=$TZ
+      - SERVER_IP=$SERVER_IP
+      - SEAFILE_ADMIN_EMAIL=$SEAFILE_ADMIN_EMAIL
+      - SEAFILE_ADMIN_PASSWORD=$SEAFILE_ADMIN_PASSWORD
+      - ENABLE_TLS=$ENABLE_TLS
+      - SQLITE=$SQLITE
+      - MYSQL_HOST=$MYSQL_HOST
+      - MYSQL_USER_PASSWD=$MYSQL_USER_PASSWD
+      - MYSQL_ROOT_PASSWD=$MYSQL_USER_PASSWD
     volumes:
       - media:/shared/media
-      - ./seafile/conf:/shared/conf
-      - ./seafile/logs:/shared/logs
-      - ./seafile/seafile-data:/shared/seafile-data
-      - ./seafile/seahub-data:/shared/seahub-data
-    depends_on:
-      - db
+      - $SEAFILE_CONF_DIR:/shared/conf
+      - $SEAFILE_LOGS_DIR:/shared/logs
+      - $SEAFILE_DATA_DIR:/shared/seafile-data
+      - $SEAFILE_SEAHUB_DIR:/shared/seahub-data
+      - $SEAFILE_SQLITE_DIR:/shared/sqlite
 
-  db:
-    image: linuxserver/mariadb
-    restart: always
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - MYSQL_ROOT_PASSWORD=secret
-      - TZ=Europe/Zurich
-    volumes:
-      - ./db:/config
       
   reverse-proxy:
     image: linuxserver/swag
@@ -41,15 +31,15 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Zurich
-      - URL=your.domain
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+      - URL=$SERVER_IP
       - VALIDATION=http
     volumes:
       - media:/shared/media
-      - ./seafile/seahub-data:/shared/seahub-data
-      - ./reverse-proxy:/config
+      - $SEAFILE_SEAHUB_DIR:/shared/seahub-data
+      - $SWAG_DIR:/config
     ports:
       - 443:443
       - 80:80
