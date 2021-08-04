@@ -1,18 +1,26 @@
 # Seafile on ARM in 5 minutes
 
-A docker-compose based deployment intended to bring Seafile on any ARMv7/ARM64 board with little effort. A database server and a reverse-proxy with automated SSL/TLS certificates renewal are included.
+A docker-compose based deployment intended to bring Seafile on any ARMv7/ARM64 board with little effort. MariaDB/SQLite and a reverse-proxy with automated TLS certificates renewal are included.
+
+Don't want automated TLS certs? See the [*No SWAG* section](##No-SWAG) below.
 
 This environment has been set up using the following images and packages (which you should glance at for further documentation):
 
-- [Base Docker image]( https://github.com/ChatDeBlofeld/seafile-arm-docker-base )
-- [linuxserver/mariadb]( https://github.com/linuxserver/docker-mariadb ) as database server
-- [linuxserver/swag]( https://github.com/linuxserver/docker-swag ) as reverse-proxy with cerbot support for _Let's Encrypt_.
+- [Base Docker image](https://github.com/ChatDeBlofeld/seafile-arm-docker-base)
+- [linuxserver/mariadb](https://github.com/linuxserver/docker-mariadb) as database server
+- [linuxserver/swag](https://github.com/linuxserver/docker-swag) as reverse-proxy with cerbot support for _Let's Encrypt_.
+
+Some other useful docs:
+
+- [Seafile manual](https://manual.seafile.com/)
+- [Compose file reference](https://docs.docker.com/compose/compose-file/compose-file-v3/)
+- [Ngninx docs](https://nginx.org/en/docs/)
 
 No guarantees of any kind are provided by using this environment.
 
 ## Prerequisites
 
-A functional docker-compose environment, a domain name associated with your server and the TCP ports 80 and 443 correctly forwarded. 
+A working docker-compose environment, a domain name associated with your server and the TCP ports 80 and 443 correctly forwarded. 
 
 ## Initialization
 
@@ -27,16 +35,26 @@ $ cd seafile-arm-docker
 
 The topology provided should easily fulfill basic use cases. For a finer configuration, see the docs mentioned above.
 
-Some points need attention though when editing the compose file.
+#### Storage service
 
-#### Environment variables
+Choose your data storage service between SQLite and MariaDB:
 
-- Your domain has to be set in the `seafile` and `reverse-proxy` services
-- All variables mentioning credentials (email, password) **must** be updated for obvious security reasons. Keep in mind that the MySQL root passwords in the `seafile` and `db` services have to match.
+```bash
+$ cp docker-compose.<mariadb|sqlite>.yml docker-compose.yml
+```
 
-#### Volumes
+#### Configuration
 
-By default, all data are stored in the compose file directory. Feel free to remap the volumes wherever you need, for example on an external drive. Just be careful that the `seahub-data` volume is also used in the `reverse-proxy` service.
+Copy the `.env.example` file:
+
+```
+$ cp .env.example .env
+```
+
+Then edit the dot env with your favorite editor and take care at least of the following topics:
+
+- All variables mentioning credentials (email, password) **must** be updated for obvious security reasons.
+- All volumes are mapped to the current directory by default, feel free to remap them to the most appropriate place for you, for example an external drive.
 
 ### Reverse-proxy configuration
 
@@ -63,7 +81,7 @@ $ docker-compose up -d
 
 You should now be able to access `https://your.domain` and log in with your admin account.
 
->Note: after the first run, all the credentials related environment variables can be removed from the compose file.
+>Note: after the first run, all the credentials related environment variables can be removed from the dot env file.
 
 ## Updating
 
@@ -89,18 +107,29 @@ The Nginx configuration may be updated sometimes, then it has to be downloaded f
 
 For all default files provided by the swag container, see [this updating procedure](https://github.com/linuxserver/docker-swag#updating-configs).
 
+## No SWAG
+
+If you don't want to run the swag container (no port forwarding, no domain, integration with your existing infrastructure or whatever), you may want to use the `noswag` version. First initialize your environment as described in the [corresponding section](##Initialization) above but skipping the *Reverse-proxy configuration* part.
+
+### Compose topology
+
+In your `docker-compose.yml`, change the service extension of the `reverse-proxy` service:
+
+```yaml
+  reverse-proxy:
+    extends:
+      file: compose-base.yml
+      service: noswag           # <-- Edit this
+```
+
+Then remap whatever port you like to the internal port 80 of the container.
+
+### Reverse-proxy configuration
+
+Edit the file `seafile.noswag.conf` and set your domain at the mentioned section.
+
 ## Troubleshooting
 
 ### Seahub failed to start
 
 Set `daemon` to `False` in `gunicorn.conf.py` and restart the Seafile service to grab more information about a failed start.
-
-### Test environment
-
-If you can't run the swag container yet (no port forwarding, no domain or whatever), you may want to use the testing web server. It's a simple Nginx configuration without SSL/TLS, just change the mentioned field in `nginx/seafile.testing.conf` and the seafile configuration files for using the hostname of your server (probably `127.0.0.1`). The variable `ENABLE_TLS` in the compose file has to be set to `0` as well.
-
-Then run:
-
-```
-$ docker-compose -f docker-compose.yml -f docker-compose.testing.yml up -d
-```

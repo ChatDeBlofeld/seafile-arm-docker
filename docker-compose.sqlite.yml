@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  seafile:
+    extends:
+      file: compose-base.yml
+      service: seafile
+    environment:
+      - SQLITE=1
+    volumes:
+      - $SEAFILE_SQLITE_DIR:/shared/sqlite
+      
+  reverse-proxy:
+    extends:
+      file: compose-base.yml
+      service: swag
+    ports:
+      - 443:443
+      - 80:80
+
+volumes:
+  media:

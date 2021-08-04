@@ -12,20 +12,20 @@ services:
       - SEAFILE_ADMIN_EMAIL=$SEAFILE_ADMIN_EMAIL
       - SEAFILE_ADMIN_PASSWORD=$SEAFILE_ADMIN_PASSWORD
       - ENABLE_TLS=$ENABLE_TLS
-      - SQLITE=$SQLITE
-      - MYSQL_HOST=$MYSQL_HOST
-      - MYSQL_USER_PASSWD=$MYSQL_USER_PASSWD
-      - MYSQL_ROOT_PASSWD=$MYSQL_USER_PASSWD
     volumes:
       - media:/shared/media
       - $SEAFILE_CONF_DIR:/shared/conf
       - $SEAFILE_LOGS_DIR:/shared/logs
       - $SEAFILE_DATA_DIR:/shared/seafile-data
       - $SEAFILE_SEAHUB_DIR:/shared/seahub-data
-      - $SEAFILE_SQLITE_DIR:/shared/sqlite
 
-      
-  reverse-proxy:
+  x-proxy-volumes:
+    volumes:
+      - media:/shared/media
+      - $SEAFILE_SEAHUB_DIR:/shared/seahub-data
+
+  swag:
+    extends: x-proxy-volumes
     image: linuxserver/swag
     restart: always
     cap_add:
@@ -37,12 +37,11 @@ services:
       - URL=$SERVER_IP
       - VALIDATION=http
     volumes:
-      - media:/shared/media
-      - $SEAFILE_SEAHUB_DIR:/shared/seahub-data
       - $SWAG_DIR:/config
-    ports:
-      - 443:443
-      - 80:80
 
-volumes:
-  media:
+  noswag:
+    extends: x-proxy-volumes
+    image: nginx
+    restart: always
+    volumes:
+      - ./nginx/seafile.noswag.conf:/etc/nginx/conf.d/seafile.conf:ro

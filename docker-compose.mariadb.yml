@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  seafile:
+    extends:
+      file: compose-base.yml
+      service: seafile
+    environment:
+      - MYSQL_HOST=$MYSQL_HOST
+      - MYSQL_USER_PASSWD=$MYSQL_USER_PASSWD
+      - MYSQL_ROOT_PASSWD=$MYSQL_USER_PASSWD
+
+  db:
+    image: linuxserver/mariadb
+    restart: always
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWD
+    volumes:
+      - $DATABASE_DIR:/config
+      
+  reverse-proxy:
+    extends:
+      file: compose-base.yml
+      service: swag
+    ports:
+      - 443:443
+      - 80:80
+
+volumes:
+  media:
