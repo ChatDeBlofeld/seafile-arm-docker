@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: linuxserver/mariadb
+    restart: always
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWD
+    volumes:
+      - $DATABASE_DIR:/config
+    networks:
+      - seafile

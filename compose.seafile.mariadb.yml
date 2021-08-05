@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  seafile:
+    environment:
+      - MYSQL_HOST=$MYSQL_HOST
+      - MYSQL_USER_PASSWD=$MYSQL_USER_PASSWD
+      - MYSQL_ROOT_PASSWD=$MYSQL_USER_PASSWD

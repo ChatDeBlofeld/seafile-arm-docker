@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    restart: always
+    volumes:
+      - media:/shared/media
+      - $SEAFILE_SEAHUB_DIR:/shared/seahub-data
+    networks:
+      - seafile

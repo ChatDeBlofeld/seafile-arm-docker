@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  seafile:
+    image: franchetti/seafile-arm
+    restart: always
+    environment:
+      - PUID=$PGID
+      - PGID=$PUID
+      - TZ=$TZ
+      - SERVER_IP=$URL
+      - SEAFILE_ADMIN_EMAIL=$SEAFILE_ADMIN_EMAIL
+      - SEAFILE_ADMIN_PASSWORD=$SEAFILE_ADMIN_PASSWORD
+      - ENABLE_TLS=$ENABLE_TLS
+      - SQLITE=$SQLITE
+    volumes:
+      - media:/shared/media
+      - $SEAFILE_CONF_DIR:/shared/conf
+      - $SEAFILE_LOGS_DIR:/shared/logs
+      - $SEAFILE_DATA_DIR:/shared/seafile-data
+      - $SEAFILE_SEAHUB_DIR:/shared/seahub-data
+    networks:
+      - seafile
+
+volumes:
+  media:
+
+networks:
+  seafile:

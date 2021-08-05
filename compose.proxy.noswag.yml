@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: nginx
+    volumes:
+      - ./nginx/seafile.noswag.conf:/etc/nginx/conf.d/seafile.conf:ro
+    ports:
+      - $NOSWAG_PORT:80
