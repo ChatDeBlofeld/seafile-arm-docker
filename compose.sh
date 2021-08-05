@@ -24,5 +24,5 @@ else
     FILES=$FILES" -f compose.proxy.swag.yml"
 fi
 
-docker-compose $FILES $@
+(set -x; docker-compose $FILES $@)
 
