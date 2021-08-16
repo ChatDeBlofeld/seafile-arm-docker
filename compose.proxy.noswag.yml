@@ -6,4 +6,4 @@ services:
     volumes:
       - ./nginx/seafile.noswag.conf:/etc/nginx/conf.d/seafile.conf:ro
     ports:
-      - $NOSWAG_PORT:80
+      - ${NOSWAG_PORT-8000}:80

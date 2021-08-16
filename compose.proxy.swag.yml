@@ -10,6 +10,9 @@ services:
       - PGID=$PGID
       - TZ=$TZ
       - URL=$URL
+      - SUBDOMAINS=${SUBDOMAINS-""}
+      - EXTRA_DOMAINS=${EXTRA_DOMAINS-""}
+      - STAGING=${STAGING-false}
       - VALIDATION=http
     volumes:
       - $SWAG_DIR:/config
