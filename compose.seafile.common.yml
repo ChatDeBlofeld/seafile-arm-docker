@@ -5,17 +5,17 @@ services:
     image: franchetti/seafile-arm
     restart: always
     environment:
-      - PUID=${PGID-""}
-      - PGID=${PUID-""}
-      - TZ=${TZ-""}
-      - SQLITE=${SQLITE-""}
-      - SERVER_IP=${URL-""}
-      - PORT=${PORT-""}
-      - SEAHUB_PORT=${SEAHUB_PORT-""}
-      - FILESERVER_PORT=${FILESERVER_PORT-""}
-      - USE_HTTPS=${USE_HTTPS-""}
-      - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL-""}
-      - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD-""}
+      - PUID=${PGID-}
+      - PGID=${PUID-}
+      - TZ=${TZ-}
+      - SQLITE=${SQLITE-}
+      - SERVER_IP=${URL-}
+      - PORT=${PORT-}
+      - SEAHUB_PORT=${SEAHUB_PORT-}
+      - FILESERVER_PORT=${FILESERVER_PORT-}
+      - USE_HTTPS=${USE_HTTPS-}
+      - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL-}
+      - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD-}
     volumes:
       - media:/shared/media
       - $SEAFILE_CONF_DIR:/shared/conf
