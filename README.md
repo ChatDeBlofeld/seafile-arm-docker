@@ -2,7 +2,7 @@
 
 A docker-compose based deployment intended to bring Seafile on any ARMv7/ARM64 board with little effort. MariaDB/SQLite and a reverse-proxy with automated TLS certificates renewal are included.
 
-Don't want automated TLS certs? See the [*No SWAG* section](####optional-no-swag) below.
+Don't want automated TLS certs? See the [*No SWAG* section](#optional-no-swag) below.
 
 This environment has been set up using the following images and packages (which you should glance at for further documentation):
 
