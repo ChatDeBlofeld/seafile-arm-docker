@@ -35,6 +35,8 @@ $ cd seafile-arm-docker
 
 The topology provided should easily fulfill basic use cases. For a finer configuration, see the docs mentioned above.
 
+>Note: **the `compose.sh` script is a shortcut to the `docker-compose` cmd which assembles the right files for your configuration. You should use it instead of `docker-compose` to get the best results.**
+
 #### Configuration
 
 Copy the `.env.example` file:
