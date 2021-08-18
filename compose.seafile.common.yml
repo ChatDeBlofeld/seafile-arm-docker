@@ -24,6 +24,11 @@ services:
       - $SEAFILE_SEAHUB_DIR:/shared/seahub-data
     networks:
       - seafile
+  memcached:
+    image: memcached
+    networks:
+      - seafile
+    
 
 volumes:
   media:
