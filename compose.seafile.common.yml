@@ -2,7 +2,7 @@ version: '3'
 
 services:
   seafile:
-    image: franchetti/seafile-arm
+    image: ${SEAFILE_IMAGE}
     restart: always
     environment:
       - PUID=${PGID-}
