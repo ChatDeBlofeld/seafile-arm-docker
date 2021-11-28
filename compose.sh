@@ -14,9 +14,11 @@ if [ $DBMS -eq 1 ]
 then
     FILES=$FILES" -f compose.seafile.mariadb.yml -f compose.db.mariadb.yml"
 elif [ $DBMS -eq 2 ]
+then
     FILES=$FILES" -f compose.seafile.mariadb.yml -f compose.db.mysql.yml"
 else
     FILES=$FILES" -f compose.seafile.sqlite.yml"
+    export SQLITE=1
 fi
 
 if [ $NOSWAG -eq 1 ]

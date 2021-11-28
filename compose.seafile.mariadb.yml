@@ -2,6 +2,8 @@ version: '3'
 
 services:
   seafile:
+    depends_on:
+      - db
     environment:
       - MYSQL_HOST=${MYSQL_HOST:-db}
       - MYSQL_PORT=${MYSQL_PORT-}
@@ -13,3 +15,4 @@ services:
       - CCNET_DB=${CCNET_DB-}
       - SEAFILE_DB=${SEAFILE_DB-}
       - SEAHUB_DB=${SEAHUB_DB-}
+    
