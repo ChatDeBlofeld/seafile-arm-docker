@@ -47,7 +47,7 @@ $ cp .env.example .env
 
 Then edit the dotenv with your favorite editor and take care at least of the following topics:
 
-- Set `SGBD=0` (respectively `SGBD=2`) to use SQLite (respectively MySQL) instead of MariaDB.
+- Set `DBMS=0` (respectively `DBMS=2`) to use SQLite (respectively MySQL) instead of MariaDB.
 - Set your domain at the `URL` variable.
 - All variables mentioning credentials (email, passwords) **must** be updated for obvious security reasons.
 - All volumes are mapped to the current directory by default, feel free to remap them to the most appropriate place for you, for example an external drive.
