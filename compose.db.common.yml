@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  db:
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWD
+    networks:
+      - seafile

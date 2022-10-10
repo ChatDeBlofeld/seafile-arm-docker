@@ -3,10 +3,5 @@ version: '3'
 services:
   db:
     image: mysql
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWD
     volumes:
-      - $DATABASE_DIR:/var/lib/mysql
-    networks:
-      - seafile
+      - ${DATABASE_DIR-db}:/var/lib/mysql
