@@ -47,7 +47,7 @@ $ cp .env.example .env
 
 Then edit the dotenv with your favorite editor and take care at least of the following topics:
 
-- Set `DBMS`to 0 (SQLite), 1 (MariaDB) or 2 (MySQL) to select your DBMS.
+- Set `DBMS` to 0 (SQLite), 1 (MariaDB) or 2 (MySQL) to select your DBMS.
 - Set your domain at the `HOST` variable.
 - All variables mentioning credentials (email, passwords) **must** be updated for obvious security reasons.
 - All volumes are mapped to the current directory by default, feel free to remap them to the most appropriate place for you, for example an external drive.
