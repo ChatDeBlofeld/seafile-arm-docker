@@ -47,8 +47,8 @@ $ cp .env.example .env
 
 Then edit the dotenv with your favorite editor and take care at least of the following topics:
 
-- Set `DBMS=0` (respectively `DBMS=2`) to use SQLite (respectively MySQL) instead of MariaDB.
-- Set your domain at the `URL` variable.
+- Set `DBMS`to 0 (SQLite), 1 (MariaDB) or 2 (MySQL) to select your DBMS.
+- Set your domain at the `HOST` variable.
 - All variables mentioning credentials (email, passwords) **must** be updated for obvious security reasons.
 - All volumes are mapped to the current directory by default, feel free to remap them to the most appropriate place for you, for example an external drive.
 
@@ -97,7 +97,6 @@ You should now be able to access `http(s)://your.domain` and log in with your ad
 Currently there's no breaking changes between the images, so the update is straightforward:
 
 ```
-$ ./compose.sh down
 $ ./compose.sh pull seafile
 $ ./compose.sh up -d
 ```

@@ -9,27 +9,27 @@ services:
       - PGID=${PUID-}
       - TZ=${TZ-}
       - SQLITE=${SQLITE-}
-      - SERVER_IP=${URL-}
+      - SERVER_IP=${HOST-}
       - PORT=${PORT-}
       - USE_HTTPS=${USE_HTTPS-}
       - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL-}
       - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD-}
     volumes:
       - media:/shared/media
-      - ${SEAFILE_CONF_DIR-conf}:/shared/conf
-      - ${SEAFILE_LOGS_DIR-logs}:/shared/logs
-      - ${SEAFILE_DATA_DIR-data}:/shared/seafile-data
-      - ${SEAFILE_SEAHUB_DIR-seahub}:/shared/seahub-data
+      - ${SEAFILE_CONF_DIR}:/shared/conf
+      - ${SEAFILE_LOGS_DIR}:/shared/logs
+      - ${SEAFILE_DATA_DIR}:/shared/seafile-data
+      - ${SEAFILE_SEAHUB_DIR}:/shared/seahub-data
     networks:
       - seafile
 
 volumes:
   media:
-  #~conf
-  #~logs
-  #~data
-  #~seahub
-  #~db
+  #~conf:
+  #~logs:
+  #~data:
+  #~seahub:
+  #~db:
 
 networks:
   seafile:

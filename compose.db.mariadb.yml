@@ -8,4 +8,4 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - ${DATABASE_DIR-db}:/config
+      - ${DATABASE_DIR}:/config

@@ -4,4 +4,4 @@ services:
   db:
     image: mysql
     volumes:
-      - ${DATABASE_DIR-db}:/var/lib/mysql
+      - ${DATABASE_DIR}:/var/lib/mysql

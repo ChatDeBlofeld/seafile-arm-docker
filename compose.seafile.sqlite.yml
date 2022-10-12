@@ -3,4 +3,4 @@ version: '3'
 services:
   seafile:
     volumes:
-      - $SEAFILE_SQLITE_DIR:/shared/sqlite
+      - ${DATABASE_DIR}:/shared/sqlite
