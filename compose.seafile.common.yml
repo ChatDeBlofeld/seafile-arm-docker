@@ -14,6 +14,7 @@ services:
       - USE_HTTPS=${USE_HTTPS-}
       - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL-}
       - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD-}
+      - MEMCACHED_HOST=${MEMCACHED_HOST-}
     volumes:
       - media:/shared/media
       - ${SEAFILE_CONF_DIR}:/shared/conf
@@ -22,6 +23,12 @@ services:
       - ${SEAFILE_SEAHUB_DIR}:/shared/seahub-data
     networks:
       - seafile
+
+  #~memcached:
+  #~  image: memcached
+  #~  command: ["-vv"]
+  #~  networks:
+  #~    - seafile
 
 volumes:
   media:
