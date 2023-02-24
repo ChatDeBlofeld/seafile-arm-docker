@@ -28,5 +28,11 @@ else
     FILES=$FILES" -f compose.proxy.swag.yml"
 fi
 
-(set -x; docker-compose $FILES $@)
+command="docker compose"
+if [ "$($command version | grep "version 2")" = "" ]
+then
+    command=docker-compose
+fi
+
+(set -x; $command $FILES $@)
 

@@ -35,7 +35,7 @@ $ cd seafile-arm-docker
 
 The topology provided should easily fulfill basic use cases. For a finer configuration, see the docs mentioned above.
 
->Note: **the `compose.sh` script is a shortcut to the `docker-compose` cmd which assembles the right files for your configuration. You should use it instead of `docker-compose` to get the best results.**
+>Note: **the `compose.sh` script is a shortcut to the `docker-compose` cmd, it assembles the right files for your configuration (mainly). You should it instead of `docker-compose` just to have things working.**
 
 #### Configuration
 
@@ -51,6 +51,14 @@ Then edit the dotenv with your favorite editor and take care at least of the fol
 - Set your domain at the `HOST` variable.
 - All variables mentioning credentials (email, passwords) **must** be updated for obvious security reasons.
 - All volumes are mapped to the current directory by default, feel free to remap them to the most appropriate place for you, for example an external drive.
+
+#### (Optional) Compose V2
+
+If compose V2 is installed, you can take advantage of the new `config` command to generate a compose file which can be used with the more traditional `docker compose` command instead of the launch script.
+
+```bash
+$ ./compose.sh config > docker-compose.yml
+```
 
 ### Reverse-proxy
 
