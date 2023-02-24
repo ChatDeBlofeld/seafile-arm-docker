@@ -79,12 +79,16 @@ You may want to see the following resources for more information about this conf
 
 #### (Optional) No SWAG
 
-Alternatively, you may want not to use the SWAG container for testing and whatever reasons. Then:
+Alternatively, you may want not to use the SWAG container for testing and whatever reasons.  Then:
 
 1. Set `NOSWAG=1` in your dotenv.
-2. Edit the file `seafile.noswag.conf` and set your domain at the mentioned section.
+2. Edit the file `seafile.noswag.conf` and set your local ip at the mentioned section.
 
-Then your application will listen to the port 80 on the host, you can change this behaviour by editing the `NOSWAG_PORT` variable in your dotenv. 
+Then depending on your use case configuration may differ.
+
+##### Local network access only
+
+In addition to the former, set `USE_HTTPS=false` in your dotenv. The application will be listening on port 80, if you want to initialize with another port, **both** `NOSWAG_PORT` and `PORT` variables have to be edited and match.
 
 ## Run
 
