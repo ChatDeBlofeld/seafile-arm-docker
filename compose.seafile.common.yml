@@ -15,7 +15,8 @@ services:
       - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL-}
       - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD-}
       - MEMCACHED_HOST=${MEMCACHED_HOST-}
-      - WEBDAV=${WEBDAV-0}
+      - WEBDAV=${WEBDAV-}
+      - NOTIFICATION_SERVER=${NOTIFICATION_SERVER-}
     volumes:
       - media:/shared/media
       - ${SEAFILE_CONF_DIR}:/shared/conf
