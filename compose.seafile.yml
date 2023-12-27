@@ -4,6 +4,8 @@ services:
   seafile:
     image: ${SEAFILE_IMAGE}
     restart: always
+    depends_on:
+      - db
     environment:
       - PUID=${PGID-}
       - PGID=${PUID-}
@@ -17,11 +19,38 @@ services:
       - MEMCACHED_HOST=${MEMCACHED_HOST-}
       - WEBDAV=${WEBDAV-}
       - NOTIFICATION_SERVER=${NOTIFICATION_SERVER-}
+      - MYSQL_HOST=${MYSQL_HOST:-db}
+      - MYSQL_PORT=${MYSQL_PORT-}
+      - USE_EXISTING_DB=${USE_EXISTING_DB-}
+      - MYSQL_USER=${MYSQL_USER-}
+      - MYSQL_USER_PASSWD=${MYSQL_USER_PASSWD-}
+      - MYSQL_USER_HOST=${MYSQL_USER_HOST-}
+      - MYSQL_ROOT_PASSWD=${MYSQL_ROOT_PASSWD-}
+      - CCNET_DB=${CCNET_DB-}
+      - SEAFILE_DB=${SEAFILE_DB-}
+      - SEAHUB_DB=${SEAHUB_DB-}
     volumes:
       - media:/shared/media
       - ${SEAFILE_CONF_DIR}:/shared/conf
       - ${SEAFILE_LOGS_DIR}:/shared/logs
       - ${SEAFILE_DATA_DIR}:/shared/seafile-data
+      - ${SEAFILE_SEAHUB_DIR}:/shared/seahub-data
+    networks:
+      - seafile
+
+  db:
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWD
+    networks:
+      - seafile
+
+  reverse-proxy:
+    restart: always
+    depends_on:
+      - seafile
+    volumes:
+      - media:/shared/media
       - ${SEAFILE_SEAHUB_DIR}:/shared/seahub-data
     networks:
       - seafile
