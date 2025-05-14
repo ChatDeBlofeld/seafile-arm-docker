@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   seafile:
     image: ${SEAFILE_IMAGE}
