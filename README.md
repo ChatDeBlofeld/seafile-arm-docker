@@ -1,6 +1,6 @@
 # Seafile on ARM in 5 minutes
 
-A docker-compose based deployment intended to bring Seafile on any ARMv7/ARM64 board with little effort. MariaDB/SQLite and a reverse-proxy with automated TLS certificates renewal are included.
+A docker-compose based deployment intended to bring Seafile on any ARMv7/ARM64 board with little effort. A DBMS (MariaDB or MySQL) and a reverse-proxy with automated TLS certificates renewal are included.
 
 Don't want automated TLS certs? See the [*No SWAG* section](#optional-no-swag) below.
 
@@ -35,7 +35,7 @@ $ cd seafile-arm-docker
 
 The topology provided should easily fulfill basic use cases. For a finer configuration, see the docs mentioned above.
 
->Note: **the `compose.sh` script is a shortcut to the `docker-compose` cmd, it assembles the right files for your configuration (mainly). You should it instead of `docker-compose` just to have things working.**
+>Note: **the `compose.sh` script is a shortcut to the `docker compose` cmd, it assembles the right files for your configuration (mainly). You should it instead of `docker compose` just to have things working.**
 
 #### Configuration
 
@@ -47,7 +47,7 @@ $ cp .env.example .env
 
 Then edit the dotenv with your favorite editor and take care at least of the following topics:
 
-- Set `DBMS` to 0 (SQLite), 1 (MariaDB) or 2 (MySQL) to select your DBMS.
+- Set `DBMS` to 0 (MariaDB) or 1 (MySQL) to select your DBMS.
 - Set your domain at the `HOST` variable.
 - All variables mentioning credentials (email, passwords) **must** be updated for obvious security reasons.
 - All volumes are mapped to the current directory by default, feel free to remap them to the most appropriate place for you, for example an external drive.
@@ -106,7 +106,7 @@ You should now be able to access `http(s)://your.domain` and log in with your ad
 
 ### Seafile service
 
-Currently there's no breaking changes between the images, so the update is straightforward:
+Usually there's no breaking changes between the images, so the update is straightforward:
 
 ```
 $ ./compose.sh pull seafile
@@ -114,6 +114,10 @@ $ ./compose.sh up -d
 ```
 
 >Note: rollback will likely fail for major updates
+
+#### Update to Seafile 11 with SQLite
+
+**SQLite support has been removed in Seafile 11**, so if you are using SQLite, you will have to migrate your data to MariaDB or MySQL. See the [migration guide](https://github.com/ChatDeBlofeld/seafile-arm-docker-base/blob/master/SQLITE_2_MYSQL.md) for more information.
 
 ### Thirdpart images
 
