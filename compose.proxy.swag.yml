@@ -7,7 +7,7 @@ services:
       - PUID=$PUID
       - PGID=$PGID
       - TZ=$TZ
-      - URL=$HOST
+      - URL=$SEAFILE_HOST
       - SUBDOMAINS=${SUBDOMAINS-}
       - EXTRA_DOMAINS=${EXTRA_DOMAINS-}
       - STAGING=${STAGING-false}

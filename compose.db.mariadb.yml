@@ -7,3 +7,7 @@ services:
       - TZ=$TZ
     volumes:
       - ${DATABASE_DIR}:/config
+
+  seafile:
+    environment:
+      - DBMS=0

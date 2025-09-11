@@ -35,8 +35,6 @@ $ cd seafile-arm-docker
 
 The topology provided should easily fulfill basic use cases. For a finer configuration, see the docs mentioned above.
 
->Note: **the `compose.sh` script is a shortcut to the `docker compose` cmd, it assembles the right files for your configuration (mainly). You should it instead of `docker compose` just to have things working.**
-
 #### Configuration
 
 Copy the `.env.example` file:
@@ -47,18 +45,10 @@ $ cp .env.example .env
 
 Then edit the dotenv with your favorite editor and take care at least of the following topics:
 
-- Set `DBMS` to 0 (MariaDB) or 1 (MySQL) to select your DBMS.
-- Set your domain at the `HOST` variable.
+- Select your database server between MariaDB and MySQL by commenting/uncommenting the appropriate line.
+- Set your domain at the `SEAFILE_HOST` variable.
 - All variables mentioning credentials (email, passwords) **must** be updated for obvious security reasons.
 - All volumes are mapped to the current directory by default, feel free to remap them to the most appropriate place for you, for example an external drive.
-
-#### (Optional) Compose V2
-
-If compose V2 is installed, you can take advantage of the new `config` command to generate a compose file which can be used with the more traditional `docker compose` command instead of the launch script.
-
-```bash
-$ ./compose.sh config > docker-compose.yml
-```
 
 ### Reverse-proxy
 
@@ -67,15 +57,10 @@ $ ./compose.sh config > docker-compose.yml
 First generate the certificates by running the service once:
 
 ```
-$ ./compose.sh up reverse-proxy
+$ docker compose up reverse-proxy
 ```
 
 If everything went right, stop the container and copy the file `nginx/seafile.conf` to `/path/to/swag/volume/nginx/site-confs` and set your domain at the mentioned sections.
-
-You may want to see the following resources for more information about this configuration:
-
-- https://manual.seafile.com/deploy/deploy_with_nginx/
-- https://manual.seafile.com/deploy/https_with_nginx
 
 #### (Optional) No SWAG
 
@@ -88,14 +73,14 @@ Then depending on your use case configuration may differ.
 
 ##### Local network access only
 
-In addition to the former, set `USE_HTTPS=false` in your dotenv. The application will be listening on port 80, if you want to initialize with another port, **both** `NOSWAG_PORT` and `PORT` variables have to be edited and match.
+In addition to the former, set `USE_HTTPS=0` in your dotenv. The application will be listening on port 80, if you want to initialize with another port, **both** `NOSWAG_PORT` and `SEAFILE_PORT` variables have to be edited and match.
 
 ## Run
 
 Simply run:
 
 ```
-$ ./compose.sh up -d
+$ docker compose up -d
 ```
 
 You should now be able to access `http(s)://your.domain` and log in with your admin account.
@@ -109,15 +94,15 @@ You should now be able to access `http(s)://your.domain` and log in with your ad
 Usually there's no breaking changes between the images, so the update is straightforward:
 
 ```
-$ ./compose.sh pull seafile
-$ ./compose.sh up -d
+$ docker compose pull seafile
+$ docker compose up -d
 ```
 
 >Note: rollback will likely fail for major updates
 
 #### Update to Seafile 11 with SQLite
 
-**SQLite support has been removed in Seafile 11**, so if you are using SQLite, you will have to migrate your data to MariaDB or MySQL. See the [migration guide](https://github.com/ChatDeBlofeld/seafile-arm-docker-base/blob/master/SQLITE_2_MYSQL.md) for more information.
+**SQLite support has been removed in Seafile 11**, so if you are using SQLite, you will have to migrate your data to MariaDB or MySQL. See the [migration guide](https://github.com/ChatDeBlofeld/seafile-arm-docker-base/blob/v11.0.13/SQLITE_2_MYSQL.md) for more information.
 
 ### Thirdpart images
 

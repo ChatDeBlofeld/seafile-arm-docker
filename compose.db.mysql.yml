@@ -3,3 +3,7 @@ services:
     image: mysql
     volumes:
       - ${DATABASE_DIR}:/var/lib/mysql
+
+  seafile:
+    environment:
+      - DBMS=1

@@ -9,8 +9,8 @@ services:
       - PGID=${PUID-}
       - TZ=${TZ-}
       - SQLITE=${SQLITE-}
-      - SERVER_IP=${HOST-}
-      - PORT=${PORT-}
+      - SERVER_IP=${SEAFILE_HOST-}
+      - PORT=${SEAFILE_PORT-}
       - USE_HTTPS=${USE_HTTPS-}
       - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL-}
       - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD-}
